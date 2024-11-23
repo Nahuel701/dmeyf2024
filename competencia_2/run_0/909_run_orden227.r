@@ -1,16 +1,3 @@
-install.packages("data.table", repos = "http://cran.r-project.org")
-# Install the lightgbm package
-install.packages("lightgbm", repos = "http://cran.r-project.org")
-
-# Install the rlist package
-install.packages("rlist", repos = "http://cran.r-project.org")
-
-# Install the mlflow package
-install.packages("mlflow", repos = "http://cran.r-project.org")
-
-# Install the digest package
-install.packages("digest", repos = "http://cran.r-project.org")
-
 require("rlang")
 
 # workflow que voy a correr
