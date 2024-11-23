@@ -5,7 +5,7 @@ install.packages("data.table")
 install.packages("rlist")
 install.packages("mlflow")
 install.packages("devtools")
-install.packages("'R.utils'")
+install.packages("R.utils")
 devtools::install_github("krlmlr/ulimit")
 
 
