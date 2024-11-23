@@ -1,3 +1,6 @@
+file.edit("~/.Rprofile")
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+
 install.packages("data.table")
 install.packages("rlist")
 install.packages("mlflow")
