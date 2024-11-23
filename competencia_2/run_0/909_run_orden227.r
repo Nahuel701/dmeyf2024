@@ -1,3 +1,5 @@
+install.packages("data.table", repos = "http://cran.r-project.org")
+
 require("rlang")
 
 # workflow que voy a correr
