@@ -1,9 +1,11 @@
-file.edit("~/.Rprofile")
-options(repos = c(CRAN = "https://cloud.r-project.org/"))
+# file.edit("~/.Rprofile")
+# options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
 install.packages("data.table")
 install.packages("rlist")
 install.packages("mlflow")
+install.packages("devtools")
+devtools::install_github("krlmlr/ulimit")
 
 
 require("rlang")
