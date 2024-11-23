@@ -14,13 +14,12 @@ require("ranger")
 PARAM <- list()
 PARAM$experimento <- "clu-randomforest"
 PARAM$semilla_primigenia <- 102191   # aqui va SU semilla
-PARAM$dataset <- "~/datasets/competencia_01.csv"
-
+PARAM$dataset <- "/Users/nahuelalejocaceres/Desktop/Maestría/DMEyF/Number_1/cluster_exp.csv"
 
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 # Aqui empieza el programa
-setwd("~/buckets/b1")
+setwd("/Users/nahuelalejocaceres/Desktop/Maestría/DMEyF/Number_1/bucket/b2")
 
 # leo el dataset
 dataset <- fread(PARAM$dataset)
@@ -37,16 +36,21 @@ setwd(paste0("./exp/", PARAM$experimento, "/"))
 # campos arbitrarios, solo como ejemplo
 # usted DEBE MANDARIAMENTE agregar más campos aqui
 # no permita que la pereza se apodere de su alma
-campos_cluster <- c("cliente_edad", "cliente_antiguedad", "ctrx_quarter",
-  "mpayroll", "mcaja_ahorro", "mtarjeta_visa_consumo",
-  "mtarjeta_master_consumo", "mprestamos_personales",
-  "Visa_status", "Master_status", "cdescubierto_preacordado")
+ campos_cluster <- c( 'cliente_edad', 'cliente_antiguedad',
+                     'cuentas_ahorros', 'tarjetas_debito_credito',
+                     'rentabilidad_comisiones', 'mactivos_margen', 'ctrx_quarter',
+                     'descubiertos_prestamos', 'mpasivos_margen', 'card_limits',
+                     'transactions_usage')
 
+# include all columns from the dataset except clase_ternaria
+campos_cluster <- colnames(dataset)[colnames(dataset) != 'clase_ternaria']
+
+campos_cluster <- unique(campos_cluster)
 
 # genero el dataset chico
 dchico <- dataset[
   clase_ternaria=="BAJA+2", 
-  c("numero_de_cliente",campos_cluster),
+  c(campos_cluster),
   with=FALSE]
 
 # arreglo los valores NA
@@ -119,6 +123,12 @@ fwrite(dcentroides,
        sep= "\t" )
 
 #--------------------------------------
+
+# Guardo el dataset con el cluster asignado en formato csv
+fwrite(dchico,
+       file= "dchico_cluster.csv",
+       sep= ",")
+
 # gafico los clusters en forma bivariada
 
 # Solo voy a mostrar un porcentaje de dchico
