@@ -1,5 +1,0 @@
-Rscript -e "install.packages('data.table', repos='http://cran.r-project.org')"
-Rscript -e "install.packages('lightgbm', repos='http://cran.r-project.org')"
-Rscript -e "install.packages('rlist', repos='http://cran.r-project.org')"
-Rscript -e "install.packages('mlflow', repos='http://cran.r-project.org')"
-Rscript -e "install.packages('digest', repos='http://cran.r-project.org')"
