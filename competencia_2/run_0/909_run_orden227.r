@@ -1,3 +1,8 @@
+install.packages("data.table")
+install.packages("rlist")
+install.packages("mlflow")
+
+
 require("rlang")
 
 # workflow que voy a correr
