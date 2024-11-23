@@ -6,6 +6,11 @@ install.packages("rlist")
 install.packages("mlflow")
 install.packages("devtools")
 install.packages("R.utils")
+install.packages("primes")
+install.packages("DiceKriging")
+install.packages("ggplot2")
+install.packages("mlrMBO")
+
 devtools::install_github("krlmlr/ulimit")
 
 
