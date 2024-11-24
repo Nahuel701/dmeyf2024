@@ -21,7 +21,7 @@ require("yaml", quietly=TRUE)
 
 # Instalación de "mice" (en caso de que sea necesario)
 if(!("mice" %in% installed.packages()))
-  install.packages("mice", repos = "http://cran.us.r-project.org")
+  install.packages("mice", repos = "http://cran.us.r-project.org", lib="~/R/library")
 library(mice)
 
 

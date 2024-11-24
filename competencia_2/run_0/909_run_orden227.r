@@ -12,7 +12,7 @@ install.packages("DiceKriging",lib="~/R/library")
 install.packages("ggplot2",lib="~/R/library")
 install.packages("mlrMBO",lib="~/R/library")
 
-devtools::install_github("krlmlr/ulimit")
+devtools::install_github("krlmlr/ulimit", lib="~/R/library")
 
 
 require("rlang")
