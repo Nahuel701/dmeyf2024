@@ -1,4 +1,4 @@
-file.edit("~/.Rprofile")
+# file.edit("~/.Rprofile")
 options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
 install.packages("data.table")
