@@ -1,9 +1,7 @@
 # file.edit("~/.Rprofile")
 # sudo chmod -R 777 /usr/local/lib/R/site-library
-options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
 # Set the library path
-.libPaths("~/R/library")
 
 # Function to install and load packages
 check_install <- function(package) {
