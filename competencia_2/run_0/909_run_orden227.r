@@ -2,17 +2,17 @@
 # sudo chmod -R 777 /usr/local/lib/R/site-library
 options(repos = c(CRAN = "https://cloud.r-project.org/"))
 
-install.packages("data.table",lib="~/R/library")
-install.packages("rlist",lib="~/R/library")
-install.packages("mlflow",lib="~/R/library")
-install.packages("devtools",lib="~/R/library")
-install.packages("R.utils",lib="~/R/library")
-install.packages("primes",lib="~/R/library")
-install.packages("DiceKriging",lib="~/R/library")
-install.packages("ggplot2",lib="~/R/library")
-install.packages("mlrMBO",lib="~/R/library")
+install.packages("data.table")
+install.packages("rlist")
+install.packages("mlflow")
+install.packages("devtools")
+install.packages("R.utils")
+install.packages("primes")
+install.packages("DiceKriging")
+install.packages("ggplot2")
+install.packages("mlrMBO")
 
-devtools::install_github("krlmlr/ulimit", lib="~/R/library")
+devtools::install_github("krlmlr/ulimit")
 
 
 require("rlang")
