@@ -17,12 +17,12 @@ devtools::install_github("krlmlr/ulimit")
 require("rlang")
 
 # workflow que voy a correr
-PARAM <- "competencia_2/run_0/990_workflow_orden227_SEMI.r"
+PARAM <- "competencia_2/run_1/990_workflow_orden227_SEMI.r"
 
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$repo_dir <- "~/dmeyf2024/"
+envg$EXPENV$repo_dir <- "~/dmeyf2024/competencia_2/run_1"
 
 #------------------------------------------------------------------------------
 
