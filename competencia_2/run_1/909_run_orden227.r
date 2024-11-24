@@ -6,31 +6,21 @@ options(repos = c(CRAN = "https://cloud.r-project.org/"))
 .libPaths("~/R/library")
 
 # Function to install and load packages
-install_and_load <- function(package) {
+check_install <- function(package) {
   if (!require(package, character.only = TRUE)) {
     install.packages(package, lib = "~/R/library", dependencies = TRUE)
-    library(package, character.only = TRUE)
+    # library(package, character.only = TRUE)
   }
 }
 
 # List of packages to install
-packages <- c("data.table", "ggplot2", "dplyr", "mice", "DiceKriging", "mlrMBO", "R.utils", "primes", "rlist", "mlflow", "")
+packages <- c("data.table", "ggplot2", "dplyr", "mice", "DiceKriging", "mlrMBO", "R.utils", "primes", "rlist", "mlflow")
 
 # Install and load each package
 for (pkg in packages) {
-  install_and_load(pkg)
+  check_install(pkg)
 }
 
-
-install.packages("data.table")
-install.packages("rlist")
-install.packages("mlflow")
-install.packages("devtools")
-install.packages("R.utils")
-install.packages("primes")
-install.packages("DiceKriging")
-install.packages("ggplot2")
-install.packages("mlrMBO")
 devtools::install_github("krlmlr/ulimit", "~/R/library")
 
 
