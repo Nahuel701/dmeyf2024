@@ -22,7 +22,7 @@ PARAM <- "competencia_2/run_1/990_workflow_orden227_SEMI.r"
 envg <- env()
 
 envg$EXPENV <- list()
-envg$EXPENV$repo_dir <- "~/dmeyf2024/competencia_2/run_1"
+envg$EXPENV$repo_dir <- "~/dmeyf2024/"
 
 #------------------------------------------------------------------------------
 
