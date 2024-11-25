@@ -4,20 +4,20 @@
 # Set the library path
 
 # Function to install and load packages
-check_install <- function(package) {
-  if (!require(package, character.only = TRUE)) {
-    install.packages(package, lib = "~/R/library", dependencies = TRUE)
-    # library(package, character.only = TRUE)
-  }
-}
+# check_install <- function(package) {
+#   if (!require(package, character.only = TRUE)) {
+#     install.packages(package, lib = "~/R/library", dependencies = TRUE)
+#     # library(package, character.only = TRUE)
+#   }
+# }
 
-# List of packages to install
-packages <- c("data.table", "ggplot2", "dplyr", "mice", "DiceKriging", "mlrMBO", "R.utils", "primes", "rlist", "mlflow")
+# # List of packages to install
+# packages <- c("data.table", "ggplot2", "dplyr", "mice", "DiceKriging", "mlrMBO", "R.utils", "primes", "rlist", "mlflow")
 
-# Install and load each package
-for (pkg in packages) {
-  check_install(pkg)
-}
+# # Install and load each package
+# for (pkg in packages) {
+#   check_install(pkg)
+# }
 
 devtools::install_github("krlmlr/ulimit", "~/R/library")
 
