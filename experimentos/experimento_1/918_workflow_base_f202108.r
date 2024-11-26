@@ -433,7 +433,7 @@ wf_agosto <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
+  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_2.csv.gz")
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
