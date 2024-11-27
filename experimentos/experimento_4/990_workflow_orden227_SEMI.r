@@ -474,7 +474,7 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
 
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_manual_base()
-  DR_drifting_base(metodo="estandarizar")
+  DR_drifting_base(metodo="deflacion")
   FEhist_base()
   # ultimo <- FErf_attributes_base()
   # CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
@@ -506,6 +506,6 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_SEMI_ago_orden227("experimento_3")
+wf_SEMI_ago_orden227("experimento_4")
 
 
