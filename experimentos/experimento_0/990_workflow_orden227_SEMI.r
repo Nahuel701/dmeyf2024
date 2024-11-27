@@ -284,7 +284,7 @@ TS_strategy_base8 <- function( pinputexps )
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
-# Atencion, el undersampling es de 0.02
+# Atencion, el undersampling es de 0.2
 #  tanto para entrenamineto como para  Final train$clase01_valor1
 
 TS_strategy_base8 <- function( pinputexps )
@@ -293,9 +293,9 @@ TS_strategy_base8 <- function( pinputexps )
 
   param_local$meta$script <- "/src/wf-etapas/z2101_TS_training_strategy.r"
 
-  param_local$future <- c(202108)
+  param_local$future <- c(202106)
 
-  param_local$final_train$undersampling <- 0.02
+  param_local$final_train$undersampling <- 0.2
   param_local$final_train$clase_minoritaria <- c( "BAJA+1", "BAJA+2")
   param_local$final_train$training <- c(
     202105, 202104, 202103, 202102, 202101, 
@@ -305,8 +305,8 @@ TS_strategy_base8 <- function( pinputexps )
   )
 
 
-  param_local$train$testing <- c(202106)
-  param_local$train$validation <- c(202105)
+  param_local$train$testing <- c(202105)
+  param_local$train$validation <- c(202104)
 
   param_local$train$training <- c(
     202103, 202102, 202101, 
@@ -318,7 +318,7 @@ TS_strategy_base8 <- function( pinputexps )
 
   # Atencion  0.2  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling
-  param_local$train$undersampling <- 0.02
+  param_local$train$undersampling <- 0.2
   param_local$train$clase_minoritaria <- c( "BAJA+1", "BAJA+2")
 
   return( exp_correr_script( param_local ) ) # linea fija
@@ -496,7 +496,7 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
   )
 
   SC_scoring_semillerio( c(fm, ts8) )
-  KA_evaluate_kaggle_semillerio()
+  # KA_evaluate_kaggle_semillerio()
   
 
   return( exp_wf_end() ) # linea fija
