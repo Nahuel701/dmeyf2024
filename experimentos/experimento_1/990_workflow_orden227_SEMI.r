@@ -506,6 +506,6 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_SEMI_ago_orden227("experimento_0")
+wf_SEMI_ago_orden227("experimento_1")
 
 
