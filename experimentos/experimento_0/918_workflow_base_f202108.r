@@ -135,18 +135,18 @@ FEhist_base <- function( pinputexps)
   param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
   param_local$lag1 <- TRUE
-  param_local$lag2 <- FALSE # no me engraso con los lags de orden 2
+  param_local$lag2 <- TRUE # no me engraso con los lags de orden 2
   param_local$lag3 <- FALSE # no me engraso con los lags de orden 3
 
   # no me engraso las manos con las tendencias
-  param_local$Tendencias1$run <- TRUE  # FALSE, no corre nada de lo que sigue
-  param_local$Tendencias1$ventana <- 6
+  param_local$Tendencias1$run <- FALSE  # FALSE, no corre nada de lo que sigue
+  param_local$Tendencias1$ventana <- 2
   param_local$Tendencias1$tendencia <- TRUE
-  param_local$Tendencias1$minimo <- FALSE
-  param_local$Tendencias1$maximo <- FALSE
-  param_local$Tendencias1$promedio <- FALSE
-  param_local$Tendencias1$ratioavg <- FALSE
-  param_local$Tendencias1$ratiomax <- FALSE
+  param_local$Tendencias1$minimo <- TRUE
+  param_local$Tendencias1$maximo <- TRUE
+  param_local$Tendencias1$promedio <- TRUE
+  param_local$Tendencias1$ratioavg <- TRUE
+  param_local$Tendencias1$ratiomax <- TRUE
 
   # no me engraso las manos con las tendencias de segundo orden
   param_local$Tendencias2$run <- FALSE
@@ -266,19 +266,28 @@ TS_strategy_base8 <- function( pinputexps )
 
   param_local$meta$script <- "/src/wf-etapas/z2101_TS_training_strategy.r"
 
+  param_local$future <- c(202106)
 
-  param_local$future <- c(202108)
-
-  param_local$final_train$undersampling <- 1.0
+  param_local$final_train$undersampling <- 0.2
   param_local$final_train$clase_minoritaria <- c( "BAJA+1", "BAJA+2")
-  param_local$final_train$training <- c(202106, 202105, 202104,
-    202103, 202102, 202101)
+  param_local$final_train$training <- c(
+    202105, 202104, 202103, 202102, 202101, 
+    202012, 202011, 202010, 202009, 202008, 202007, 
+    # 202006  Excluyo por variables rotas
+    202005
+  )
 
 
-  param_local$train$training <- c(202104, 202103, 202102,
-    202101, 202012, 202011)
-  param_local$train$validation <- c(202105)
-  param_local$train$testing <- c(202106)
+  param_local$train$testing <- c(202105)
+  param_local$train$validation <- c(202104)
+
+  param_local$train$training <- c(
+    202103, 202102, 202101, 
+    202012, 202011, 202010, 202009, 202008, 202007, 
+    # 202006  Excluyo por variables rotas
+    202005
+  )
+
 
   # Atencion  0.2  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling
@@ -287,6 +296,7 @@ TS_strategy_base8 <- function( pinputexps )
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
+
 #------------------------------------------------------------------------------
 # Hyperparamteter Tuning Baseline
 #  donde la Bayuesian Optimization solo considera 4 hiperparámetros
@@ -413,6 +423,28 @@ KA_evaluate_kaggle <- function( pinputexps )
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
+
+EV_evaluate_conclase_gan <- function( pinputexps )
+{
+  if( -1 == (param_local <- exp_init())$resultado ) return( 0 )# linea fija
+
+  param_local$meta$script <- "/src/wf-etapas/z2501_EV_evaluate_conclase_gan.r"
+
+  param_local$semilla <- NULL  # no usa semilla, es deterministico
+
+  param_local$train$positivos <- c( "BAJA+2")
+  param_local$train$gan1 <- 273000
+  param_local$train$gan0 <-  -7000
+  param_local$train$meseta <- 2001
+
+  # para graficar
+  param_local$graficar$envios_desde <-   8000L
+  param_local$graficar$envios_hasta <-  16000L
+  param_local$graficar$ventana_suavizado <- 2001L
+
+  return( exp_correr_script( param_local ) ) # linea fija
+}
+
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 # A partir de ahora comienza la seccion de Workflows Completos
@@ -429,24 +461,24 @@ wf_agosto <- function( pnombrewf )
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
-  FEintra_manual_base()
-  DR_drifting_base(metodo="rank_cero_fijo")
+  # FEintra_manual_base()
+  DR_drifting_base(metodo="ninguno")
   FEhist_base()
 
-  FErf_attributes_base( arbolitos= 20,
-    hojas_por_arbol= 16,
-    datos_por_hoja= 1000,
-    mtry_ratio= 0.2
-  )
+  # FErf_attributes_base( arbolitos= 20,
+  #   hojas_por_arbol= 16,
+  #   datos_por_hoja= 1000,
+  #   mtry_ratio= 0.2
+  # )
 
   #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
   # Etapas modelado
   ts8 <- TS_strategy_base8()
-  ht <- HT_tuning_base( bo_iteraciones = 40 )  # iteraciones inteligentes
+  ht <- HT_tuning_base( bo_iteraciones = 20 )  # iteraciones inteligentes
 
   # Etapas finales
-  fm <- FM_final_models_lightgbm( c(ht, ts8), ranks=c(1), qsemillas=5 )
+  fm <- FM_final_models_lightgbm( c(ht, ts8), ranks=c(1), qsemillas=10 )
   SC_scoring( c(fm, ts8) )
   KA_evaluate_kaggle()  # genera archivos para Kaggle
 
@@ -456,6 +488,6 @@ wf_agosto <- function( pnombrewf )
 #------------------------------------------------------------------------------
 # Aqui comienza el programa
 
-# llamo al workflow con future = 202108
-wf_agosto()
+
+wf_agosto('experimento_5')
 
