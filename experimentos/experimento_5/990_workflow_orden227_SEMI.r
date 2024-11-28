@@ -458,6 +458,31 @@ KA_evaluate_kaggle_semillerio <- function( pinputexps )
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
+# proceso EV_conclase  Baseline
+# deterministico, SIN random
+
+EV_evaluate_conclase_gan <- function( pinputexps )
+{
+  if( -1 == (param_local <- exp_init())$resultado ) return( 0 )# linea fija
+
+  param_local$meta$script <- "/src/wf-etapas/z2501_EV_evaluate_conclase_gan.r"
+
+  param_local$semilla <- NULL  # no usa semilla, es deterministico
+
+  param_local$train$positivos <- c( "BAJA+2")
+  param_local$train$gan1 <- 273000
+  param_local$train$gan0 <-  -7000
+  param_local$train$meseta <- 2001
+
+  # para graficar
+  param_local$graficar$envios_desde <-   8000L
+  param_local$graficar$envios_hasta <-  16000L
+  param_local$graficar$ventana_suavizado <- 2001L
+
+  return( exp_correr_script( param_local ) ) # linea fija
+}
+
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 # A partir de ahora comienza la seccion de Workflows Completos
 #------------------------------------------------------------------------------
@@ -492,11 +517,11 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
     c(ht, ts8), # los inputs
     ranks = c(1), # 1 = el mejor de la bayesian optimization
     semillerio = 50,   # cantidad de semillas finales
-    repeticiones_exp = 1  # cantidad de repeticiones del semillerio
+    repeticiones_exp = 20  # cantidad de repeticiones del semillerio
   )
 
   SC_scoring_semillerio( c(fm, ts8) )
-  # KA_evaluate_kaggle_semillerio()
+  EV_evaluate_conclase_gan() # evaluacion contra mes CON clase
   
 
   return( exp_wf_end() ) # linea fija
