@@ -2,7 +2,7 @@ require("rlang")
 
 
 # workflow que voy a correr
-PARAM <- "/competencia_final/baseline/990_workflow_orden227_SEMI"
+PARAM <- "/competencia_final/baseline/990_workflow_orden227_SEMI.r"
 
 envg <- env()
 
