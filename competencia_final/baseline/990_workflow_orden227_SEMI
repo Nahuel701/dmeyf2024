@@ -19,7 +19,7 @@ envg$EXPENV$repo_dir <- "~/dmeyf2024/"
 envg$EXPENV$datasets_dir <- "~/buckets/b1/datasets/"
 envg$EXPENV$messenger <- "~/install/zulip_enviar.sh"
 
-envg$EXPENV$semilla_primigenia <- 903761
+envg$EXPENV$semilla_primigenia <- 849991
 
 # leo el unico parametro del script
 args <- commandArgs(trailingOnly=TRUE)
@@ -469,7 +469,7 @@ KA_evaluate_kaggle_semillerio <- function( pinputexps )
   param_local$envios_desde <- 8000L
   param_local$envios_hasta <- 14000L
   param_local$envios_salto <-   500L
-  param_local$competition <- "dm-ey-f-2024-tercera"
+  param_local$competition <- "dm-ey-f-2024-segunda"
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -490,9 +490,9 @@ wf_SEMI2_ago_orden227 <- function( pnombrewf )
 
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_manual_base()
-  DR_drifting_base(metodo="rank_cero_fijo")
+  DR_drifting_base(metodo="UVA")
   FEhist_base()
-  ultimo <- FErf_attributes_base()
+  #ultimo <- FErf_attributes_base()
   #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
   ts8 <- TS_strategy_base8()
@@ -500,7 +500,7 @@ wf_SEMI2_ago_orden227 <- function( pnombrewf )
   # la Bayesian Optimization con el semillerio dentro
   ht <- HT_tuning_semillerio(
     semillerio = 50, # semillerio dentro de la Bayesian Optim
-    bo_iteraciones = 25  # iteraciones inteligentes, apenas 10
+    bo_iteraciones = 10  # iteraciones inteligentes, apenas 10
   )
 
 
