@@ -248,9 +248,6 @@ AgregarVariables_IntraMes <- function(dataset) {
     }
   }
 
-  # Print the updated dataset
-  print(dataset)
-
 
   # valvula de seguridad para evitar valores infinitos
   # paso los infinitos a NULOS
