@@ -236,14 +236,14 @@ AgregarVariables_IntraMes <- function(dataset) {
       
       # Perform the specified operation and add the result as a new column to the dataset
       if (operation == "addition") {
-        dataset[[new_col]] <- dataset[[var1]] + dataset[[var2]]
+        dataset[, (new_col) := get(var1) + get(var2)]
       } else if (operation == "subtraction") {
-        dataset[[new_col]] <- dataset[[var1]] - dataset[[var2]]
+        dataset[, (new_col) := get(var1) - get(var2)]
       } else if (operation == "multiplication") {
-        dataset[[new_col]] <- dataset[[var1]] * dataset[[var2]]
+        dataset[, (new_col) := get(var1) * get(var2)]
       } else if (operation == "division") {
         # Check for division by zero
-        dataset[[new_col]] <- ifelse(dataset[[var2]] != 0, dataset[[var1]] / dataset[[var2]], NA)
+        dataset[, (new_col) := ifelse(get(var2) != 0, get(var1) / get(var2), NA)]
       }
     }
   }
