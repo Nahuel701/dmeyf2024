@@ -221,7 +221,7 @@ AgregarVariables_IntraMes <- function(dataset) {
   # Path to your JSON file
   json_file_path <- "path_to_your_file.json"  # Replace with your JSON file path
   json_data <- fromJSON("~/buckets/b1/references/combinations_ratios.json")
-  operation <- "addition"
+  operation <- "division"
 
   # Loop through each combination in the JSON data and perform the operation
   for (i in 1:nrow(json_data)) {
