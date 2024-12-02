@@ -379,6 +379,8 @@ for (col in numeric_cols) {
 
 # Modificar el dataset globalmente
 dataset <<- dataset[keep_mask, ]
+print(nrow(dataset))
+
 
 
 #------------------------------------------------------------------------------
