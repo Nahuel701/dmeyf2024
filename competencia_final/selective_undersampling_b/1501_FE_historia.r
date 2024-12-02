@@ -350,38 +350,36 @@ if (envg$PARAM$Tendencias2$run) {
 # |                                                |
 # '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-='
 
-drop_out_of_range_rows <- function(dataset, target_df, 
-  include_columns = c('Master_Finiciomora','Master_Fvencimiento','Master_cadelantosefectivo','Master_cconsumos','Master_delinquency','Master_madelantodolares','Master_madelantopesos','Master_mconsumosdolares','Master_mconsumospesos','Master_mconsumototal','Master_mfinanciacion_limite','Master_mlimitecompra','Master_mpagado','Master_mpagominimo','Master_mpagosdolares','Master_mpagospesos','Master_msaldodolares','Master_msaldopesos','Master_msaldototal','Master_status','Visa_Finiciomora','Visa_Fvencimiento','Visa_cadelantosefectivo','Visa_cconsumos','Visa_delinquency','Visa_madelantodolares','Visa_madelantopesos','Visa_mconsumosdolares','Visa_mconsumospesos','Visa_mconsumototal','Visa_mfinanciacion_limite','Visa_mlimitecompra','Visa_mpagado','Visa_mpagominimo','Visa_mpagosdolares','Visa_mpagospesos','Visa_msaldodolares','Visa_msaldopesos','Visa_msaldototal','Visa_status','catm_trx','catm_trx_other','ccaja_ahorro','ccaja_seguridad','ccajas_consultas','ccajas_depositos','ccajas_extracciones','ccajas_otras','ccajas_transacciones','ccajeros_propios_descuentos','ccallcenter_transacciones','ccheques_depositados','ccheques_depositados_rechazados','ccheques_emitidos','ccheques_emitidos_rechazados','ccomisiones_mantenimiento','ccomisiones_otras','ccuenta_corriente','ccuenta_debitos_automaticos','cdescubierto_preacordado','cextraccion_autoservicio','cforex','cforex_buy','cforex_sell','chomebanking_transacciones','cinversion1','cinversion2','cliente_antiguedad','cliente_edad','cliente_vip','cmobile_app_trx','cpagodeservicios','cpagomiscuentas','cpayroll2_trx','cpayroll_trx','cplazo_fijo','cprestamos_hipotecarios','cprestamos_personales','cprestamos_prendarios','cproductos','cseguro_accidentes_personales','cseguro_auto','cseguro_vida','cseguro_vivienda','ctarjeta_debito','ctarjeta_debito_transacciones','ctarjeta_master','ctarjeta_master_debitos_automaticos','ctarjeta_master_descuentos','ctarjeta_master_transacciones','ctarjeta_visa','ctarjeta_visa_debitos_automaticos','ctarjeta_visa_descuentos','ctarjeta_visa_transacciones','ctransferencias_emitidas','ctransferencias_recibidas','ctrx_quarter','internet','mactivos_margen','matm','matm_other','mautoservicio','mcaja_ahorro','mcaja_ahorro_adicional','mcaja_ahorro_dolares','mcajeros_propios_descuentos','mcheques_depositados','mcheques_depositados_rechazados','mcheques_emitidos','mcheques_emitidos_rechazados','mcomisiones','mcomisiones_mantenimiento','mcomisiones_otras','mcuenta_corriente','mcuenta_corriente_adicional','mcuenta_debitos_automaticos','mcuentas_saldo','mextraccion_autoservicio','mforex_buy','mforex_sell','minversion1_dolares','minversion1_pesos','minversion2','mpagodeservicios','mpagomiscuentas','mpasivos_margen','mpayroll','mpayroll2','mplazo_fijo_dolares','mplazo_fijo_pesos','mprestamos_hipotecarios','mprestamos_personales','mprestamos_prendarios','mrentabilidad','mrentabilidad_annual','mtarjeta_master_consumo','mtarjeta_master_descuentos','mtarjeta_visa_consumo','mtarjeta_visa_descuentos','mtransferencias_emitidas','mtransferencias_recibidas','mttarjeta_master_debitos_automaticos','mttarjeta_visa_debitos_automaticos','tcallcenter','tcuentas','thomebanking','tmobile_app')) 
-  {
-  # Filtrar las columnas a incluir que sean numéricas
-  numeric_cols <- intersect(names(target_df)[sapply(target_df, is.numeric)], include_columns)
-  
-  # Crear una máscara inicial para mantener todas las filas
-  keep_mask <- rep(TRUE, nrow(dataset))
-  # Condición para no dropear filas con 'BAJA+1' o 'BAJA+2' en 'foto_mes'
-  keep_mask <- keep_mask & !(dataset$foto_mes %in% c('BAJA+1', 'BAJA+2'))
-  
-  # Iterar sobre las columnas numéricas seleccionadas
-  for (col in numeric_cols) {
-    if (col %in% names(dataset)) {
-      # Calcular los umbrales mínimo y máximo
-      min_threshold <- min(target_df[[col]], na.rm = TRUE) - abs(min(target_df[[col]], na.rm = TRUE) * 0.2)
-      max_threshold <- max(target_df[[col]], na.rm = TRUE) + abs(max(target_df[[col]], na.rm = TRUE) * 0.2)
-      
-      # Crear una máscara para los valores dentro del rango o NA
-      mask <- (dataset[[col]] >= min_threshold & dataset[[col]] <= max_threshold) | is.na(dataset[[col]])
-      keep_mask <- keep_mask & mask
-    }
+
+include_columns = c(
+  'Master_Finiciomora','Master_Fvencimiento','Master_cadelantosefectivo','Master_cconsumos','Master_delinquency','Master_madelantodolares','Master_madelantopesos','Master_mconsumosdolares','Master_mconsumospesos','Master_mconsumototal','Master_mfinanciacion_limite','Master_mlimitecompra','Master_mpagado','Master_mpagominimo','Master_mpagosdolares','Master_mpagospesos','Master_msaldodolares','Master_msaldopesos','Master_msaldototal','Master_status','Visa_Finiciomora','Visa_Fvencimiento','Visa_cadelantosefectivo','Visa_cconsumos','Visa_delinquency','Visa_madelantodolares','Visa_madelantopesos','Visa_mconsumosdolares','Visa_mconsumospesos','Visa_mconsumototal','Visa_mfinanciacion_limite','Visa_mlimitecompra','Visa_mpagado','Visa_mpagominimo','Visa_mpagosdolares','Visa_mpagospesos','Visa_msaldodolares','Visa_msaldopesos','Visa_msaldototal','Visa_status','catm_trx','catm_trx_other','ccaja_ahorro','ccaja_seguridad','ccajas_consultas','ccajas_depositos','ccajas_extracciones','ccajas_otras','ccajas_transacciones','ccajeros_propios_descuentos','ccallcenter_transacciones','ccheques_depositados','ccheques_depositados_rechazados','ccheques_emitidos','ccheques_emitidos_rechazados','ccomisiones_mantenimiento','ccomisiones_otras','ccuenta_corriente','ccuenta_debitos_automaticos','cdescubierto_preacordado','cextraccion_autoservicio','cforex','cforex_buy','cforex_sell','chomebanking_transacciones','cinversion1','cinversion2','cliente_antiguedad','cliente_edad','cliente_vip','cmobile_app_trx','cpagodeservicios','cpagomiscuentas','cpayroll2_trx','cpayroll_trx','cplazo_fijo','cprestamos_hipotecarios','cprestamos_personales','cprestamos_prendarios','cproductos','cseguro_accidentes_personales','cseguro_auto','cseguro_vida','cseguro_vivienda','ctarjeta_debito','ctarjeta_debito_transacciones','ctarjeta_master','ctarjeta_master_debitos_automaticos','ctarjeta_master_descuentos','ctarjeta_master_transacciones','ctarjeta_visa','ctarjeta_visa_debitos_automaticos','ctarjeta_visa_descuentos','ctarjeta_visa_transacciones','ctransferencias_emitidas','ctransferencias_recibidas','ctrx_quarter','internet','mactivos_margen','matm','matm_other','mautoservicio','mcaja_ahorro','mcaja_ahorro_adicional','mcaja_ahorro_dolares','mcajeros_propios_descuentos','mcheques_depositados','mcheques_depositados_rechazados','mcheques_emitidos','mcheques_emitidos_rechazados','mcomisiones','mcomisiones_mantenimiento','mcomisiones_otras','mcuenta_corriente','mcuenta_corriente_adicional','mcuenta_debitos_automaticos','mcuentas_saldo','mextraccion_autoservicio','mforex_buy','mforex_sell','minversion1_dolares','minversion1_pesos','minversion2','mpagodeservicios','mpagomiscuentas','mpasivos_margen','mpayroll','mpayroll2','mplazo_fijo_dolares','mplazo_fijo_pesos','mprestamos_hipotecarios','mprestamos_personales','mprestamos_prendarios','mrentabilidad','mrentabilidad_annual','mtarjeta_master_consumo','mtarjeta_master_descuentos','mtarjeta_visa_consumo','mtarjeta_visa_descuentos','mtransferencias_emitidas','mtransferencias_recibidas','mttarjeta_master_debitos_automaticos','mttarjeta_visa_debitos_automaticos','tcallcenter','tcuentas','thomebanking','tmobile_app'
+  )
+target_df <- dataset[dataset$foto_mes == 201901, ]
+
+# Filtrar las columnas a incluir que sean numéricas
+numeric_cols <- intersect(names(target_df)[sapply(target_df, is.numeric)], include_columns)
+
+# Crear una máscara inicial para mantener todas las filas
+keep_mask <- rep(TRUE, nrow(dataset))
+# Condición para no dropear filas con 'BAJA+1' o 'BAJA+2' en 'foto_mes'
+keep_mask <- keep_mask & !(dataset$foto_mes %in% c('BAJA+1', 'BAJA+2'))
+
+# Iterar sobre las columnas numéricas seleccionadas
+for (col in numeric_cols) {
+  if (col %in% names(dataset)) {
+    # Calcular los umbrales mínimo y máximo
+    min_threshold <- min(target_df[[col]], na.rm = TRUE) - abs(min(target_df[[col]], na.rm = TRUE) * 0.2)
+    max_threshold <- max(target_df[[col]], na.rm = TRUE) + abs(max(target_df[[col]], na.rm = TRUE) * 0.2)
+    
+    # Crear una máscara para los valores dentro del rango o NA
+    mask <- (dataset[[col]] >= min_threshold & dataset[[col]] <= max_threshold) | is.na(dataset[[col]])
+    keep_mask <- keep_mask & mask
   }
-  
-  # Modificar el dataset globalmente
-  dataset <<- dataset[keep_mask, ]
 }
 
+# Modificar el dataset globalmente
+dataset <<- dataset[keep_mask, ]
 
-target <- dataset[dataset$foto_mes == 201901, ]
-# Llama a la función para filtrar el dataset
-drop_out_of_range_rows(dataset, target)
 
 #------------------------------------------------------------------------------
 
