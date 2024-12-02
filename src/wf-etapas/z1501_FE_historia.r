@@ -331,8 +331,13 @@ if (envg$PARAM$Tendencias2$run) {
   envg$OUTPUT$TendenciasYmuchomas2$ncol_despues <- ncol(dataset)
   GrabarOutput()
 }
-
 #------------------------------------------------------------------------------
+
+# PIRATE hahaha
+# Undersampling selectivo
+
+
+
 # grabo el dataset
 cat( "grabado dataset\n")
 cat( "Iniciando grabado del dataset\n" )
