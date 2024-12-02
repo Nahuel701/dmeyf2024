@@ -100,6 +100,7 @@ FEintra_manual_base <- function( pinputexps )
 {
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
+
   param_local$meta$script <- "/src/wf-etapas/z1301_FE_intrames_manual.r"
 
   param_local$semilla <- NULL  # no usa semilla, es deterministico
@@ -133,7 +134,7 @@ FEhist_base <- function( pinputexps)
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/competencia_final/selective_undersampling/1501_FE_historia.r"
+  param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
   param_local$lag1 <- TRUE
   param_local$lag2 <- TRUE 
@@ -177,7 +178,19 @@ FErf_attributes_base <- function( pinputexps, ratio, desvio)
 
   # Parametros de un LightGBM que se genera para estimar la column importance
   param_local$train$clase01_valor1 <- c( "BAJA+2", "BAJA+1")
-  param_local$train$training <- c( 202101, 202102, 202103)
+  param_local$train$training <- c( 
+    202105,
+    #202104, 202103, 
+    202102, 202101, 
+    202012, 202011, 202010, 202009, 202008, 202007, 
+    # 202006  Excluyo por variables rotas
+    202005, 202004, 202003, 202002, 202001,
+    201912, 201911,
+    # 201910 Excluyo por variables rotas
+    201909, 201908, 201907, 201906,
+    # 201905  Excluyo por variables rotas
+    201904, 201903
+  )
 
   # parametros para que LightGBM se comporte como Random Forest
   param_local$lgb_param <- list(
@@ -491,7 +504,7 @@ wf_SEMI2_ago_orden227 <- function( pnombrewf )
   FEintra_manual_base()
   DR_drifting_base(metodo="UVA")
   FEhist_base()
-  #ultimo <- FErf_attributes_base()
+  ultimo <- FErf_attributes_base()
   #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
   ts8 <- TS_strategy_base8()
