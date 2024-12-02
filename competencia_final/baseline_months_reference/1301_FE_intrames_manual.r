@@ -208,16 +208,8 @@ AgregarVariables_IntraMes <- function(dataset) {
   if( atributos_presentes( c("vm_mpagominimo", "vm_mlimitecompra") ))
     dataset[, vmr_mpagominimo := vm_mpagominimo / vm_mlimitecompra]
 
-  # Modificar el dataset para incluir dummies basadas en los últimos dos dígitos
+  # Modificar el dataset para incluir dummies basadas en los últimos dos dígitos de foto_mes
   dataset[, ultimos_dos_digitos := as.character(foto_mes %% 100)]  # Extraer los últimos dos dígitos como string
-  dataset[, ultimos_dos_digitos := factor(ultimos_dos_digitos)]  # Convertir a factor
-
-  # Crear variables dummy y agregarlas al dataset original
-  dummies <- as.data.table(model.matrix(~ ultimos_dos_digitos - 1, data = dataset))  # Crear dummies
-  dataset <- cbind(dataset, dummies)  # Agregar dummies al dataset
-
-  # Eliminar la columna auxiliar si no es necesaria
-  dataset[, ultimos_dos_digitos := NULL]
 
 
   # valvula de seguridad para evitar valores infinitos
