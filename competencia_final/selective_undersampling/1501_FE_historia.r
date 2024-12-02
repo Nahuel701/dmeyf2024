@@ -332,6 +332,55 @@ if (envg$PARAM$Tendencias2$run) {
   GrabarOutput()
 }
 #------------------------------------------------------------------------------
+# .=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.
+# |                     ______                     |
+# |                  .-"      "-.                  |
+# |                 /            \                 |
+# |     _          |              |          _     |
+# |    ( \         |,  .-.  .-.  ,|         / )    |
+# |     > "=._     | )(__/  \__)( |     _.=" <     |
+# |    (_/"=._"=._ |/     /\     \| _.="_.="\_)    |
+# |           "=._"(_     ^^     _)"_.="           |
+# |               "=\__|IIIIII|__/="               |
+# |              _.="| \IIIIII/ |"=._              |
+# |    _     _.="_.="\          /"=._"=._     _    |
+# |   ( \_.="_.="     `--------`     "=._"=._/ )   |
+# |    > _.="                            "=._ <    |
+# |   (_/   jgs                              \_)   |
+# |                                                |
+# '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-='
+
+drop_out_of_range_rows <- function(dataset, target_df, exclude_columns = c('numero_de_cliente', 'foto_mes', 
+                                                                           'active_quarter', 'Master_fechaalta', 
+                                                                           'Visa_fechaalta', 'clase_ternaria', 
+                                                                           'Master_fultimo_cierre', 'Visa_fultimo_cierre')) {
+  # Identificar columnas numéricas excluyendo las especificadas
+  numeric_cols <- setdiff(names(target_df)[sapply(target_df, is.numeric)], exclude_columns)
+  
+  # Crear una máscara inicial para mantener todas las filas
+  keep_mask <- rep(TRUE, nrow(dataset))
+  
+  # Iterar sobre las columnas numéricas
+  for (col in numeric_cols) {
+    if (col %in% names(dataset)) {
+      # Calcular los umbrales mínimo y máximo
+      min_threshold <- min(target_df[[col]], na.rm = TRUE) - abs(min(target_df[[col]], na.rm = TRUE) * 0.1)
+      max_threshold <- max(target_df[[col]], na.rm = TRUE) + abs(max(target_df[[col]], na.rm = TRUE) * 0.1)
+      
+      # Crear una máscara para los valores dentro del rango o NA
+      mask <- (dataset[[col]] >= min_threshold & dataset[[col]] <= max_threshold) | is.na(dataset[[col]])
+      keep_mask <- keep_mask & mask
+    }
+  }
+  
+  # Modificar el dataset globalmente
+  dataset <<- dataset[keep_mask, ]
+}
+
+# Llama a la función para filtrar el dataset
+drop_out_of_range_rows(dataset, target_df)
+
+#------------------------------------------------------------------------------
 
 # grabo el dataset
 cat( "grabado dataset\n")
