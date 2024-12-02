@@ -358,6 +358,8 @@ drop_out_of_range_rows <- function(dataset, target_df,
   
   # Crear una máscara inicial para mantener todas las filas
   keep_mask <- rep(TRUE, nrow(dataset))
+  # Condición para no dropear filas con 'BAJA+1' o 'BAJA+2' en 'foto_mes'
+  keep_mask <- keep_mask & !(dataset$foto_mes %in% c('BAJA+1', 'BAJA+2'))
   
   # Iterar sobre las columnas numéricas seleccionadas
   for (col in numeric_cols) {
