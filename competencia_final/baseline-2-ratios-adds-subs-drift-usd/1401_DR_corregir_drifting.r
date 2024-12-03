@@ -164,7 +164,7 @@ drift_dolar_tarjeta <- function(campos_monetarios) {
 
   dataset[tb_indices,
     on = c(envg$PARAM$dataset_metadata$periodo),
-    (campos_monetarios) := .SD * i.tarjeta,
+    (campos_monetarios) := .SD * i.dolar_tarjeta,
     .SDcols = campos_monetarios
   ]
 
