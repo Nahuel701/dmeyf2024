@@ -101,7 +101,7 @@ FEintra_manual_base <- function( pinputexps )
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/competencia_final/baseline-2-adds-subs/1301_FE_intrames_manual.r"
+  param_local$meta$script <- "/competencia_final/baseline-2-ratios-adds-subs-drift-usd/1301_FE_intrames_manual.r"
 
   param_local$semilla <- NULL  # no usa semilla, es deterministico
 
@@ -116,7 +116,7 @@ DR_drifting_base <- function( pinputexps, metodo)
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/competencia_final/baseline-2-adds-subs/1401_DR_corregir_drifting.r"
+  param_local$meta$script <- "/competencia_final/baseline-2-ratios-adds-subs-drift-usd/1401_DR_corregir_drifting.r"
 
   # valores posibles
   #  "ninguno", "rank_simple", "rank_cero_fijo", "deflacion", "estandarizar"
