@@ -159,7 +159,7 @@ drift_deflacion <- function(campos_monetarios) {
 }
 #------------------------------------------------------------------------------
 
-drift_deflacion <- function(campos_monetarios) {
+dolar_tarjeta <- function(campos_monetarios) {
   cat( "inicio drift_dolar_tarjeta()\n")
 
   dataset[tb_indices,
@@ -279,7 +279,7 @@ cat("Campos de tarjetas USD:", campos_tarjeta_usd, "\n")
 # hay que probar experimentalmente cual funciona mejor
 
 drift_UVA(campos_monetarios)
-drift_dolar_blue(compos_txs_usd)
+drift_dolar_blue(campos_txs_usd)
 drift_dolar_tarjeta(campos_tarjeta_usd)
 
 
