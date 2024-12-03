@@ -159,7 +159,7 @@ drift_deflacion <- function(campos_monetarios) {
 }
 #------------------------------------------------------------------------------
 
-dolar_tarjeta <- function(campos_monetarios) {
+drift_dolar_tarjeta <- function(campos_monetarios) {
   cat( "inicio drift_dolar_tarjeta()\n")
 
   dataset[tb_indices,
