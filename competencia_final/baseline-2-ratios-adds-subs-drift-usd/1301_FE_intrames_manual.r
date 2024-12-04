@@ -210,27 +210,89 @@ AgregarVariables_IntraMes <- function(dataset) {
 
   # Aqui debe usted agregar sus propias nuevas variables
 
-  if(atributos_presentes(c("Master_madelantopesos", "Master_mpagominimo"))) {
-  dataset[, Master_madelantopesos_minus_Master_mpagominimo := Master_madelantopesos - Master_mpagominimo]
+  if(atributos_presentes(c("Master_msaldototal", "Master_mpagospesos"))) {
+  dataset[, Master_msaldototal_plus_Master_mpagospesos := Master_msaldototal + Master_mpagospesos]
   }
 
-  if(atributos_presentes(c("Visa_madelantopesos", "Visa_mpagominimo"))) {
+  if(atributos_presentes(c("Master_msaldopesos", "Master_mpagospesos"))) {
+    dataset[, Master_msaldopesos_plus_Master_mpagospesos := Master_msaldopesos + Master_mpagospesos]
+  }
+
+  if(atributos_presentes(c("Master_madelantopesos", "Master_mpagominimo"))) {
+    dataset[, Master_madelantopesos_plus_Master_mpagominimo := Master_madelantopesos + Master_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_madelantopesos", "Visa_mpagominimo"))) {
+    dataset[, Master_madelantopesos_plus_Visa_mpagominimo := Master_madelantopesos + Visa_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_madelantodolares", "Master_mpagominimo"))) {
+    dataset[, Master_madelantodolares_plus_Master_mpagominimo := Master_madelantodolares + Master_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_madelantodolares", "Visa_mpagominimo"))) {
+    dataset[, Master_madelantodolares_plus_Visa_mpagominimo := Master_madelantodolares + Visa_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_mpagosdolares", "Master_mpagominimo"))) {
+    dataset[, Master_mpagosdolares_plus_Master_mpagominimo := Master_mpagosdolares + Master_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_mpagosdolares", "Visa_mpagominimo"))) {
+    dataset[, Master_mpagosdolares_plus_Visa_mpagominimo := Master_mpagosdolares + Visa_mpagominimo]
+  }
+
+
+  if(atributos_presentes(c("Master_msaldototal", "Master_mconsumospesos"))) {
+    dataset[, Master_msaldototal_minus_Master_mconsumospesos := Master_msaldototal - Master_mconsumospesos]
+  }
+
+  if(atributos_presentes(c("Master_msaldototal", "Master_mconsumosdolares"))) {
+    dataset[, Master_msaldototal_minus_Master_mconsumosdolares := Master_msaldototal - Master_mconsumosdolares]
+  }
+
+  if(atributos_presentes(c("Master_msaldototal", "Master_mconsumototal"))) {
+    dataset[, Master_msaldototal_minus_Master_mconsumototal := Master_msaldototal - Master_mconsumototal]
+  }
+
+  if(atributos_presentes(c("Master_msaldopesos", "Master_mconsumospesos"))) {
+    dataset[, Master_msaldopesos_minus_Master_mconsumospesos := Master_msaldopesos - Master_mconsumospesos]
+  }
+
+  if(atributos_presentes(c("Master_msaldopesos", "Master_mconsumototal"))) {
+    dataset[, Master_msaldopesos_minus_Master_mconsumototal := Master_msaldopesos - Master_mconsumototal]
+  }
+
+  if(atributos_presentes(c("Master_mconsumosdolares", "Master_mpagominimo"))) {
+    dataset[, Master_mconsumosdolares_minus_Master_mpagominimo := Master_mconsumosdolares - Master_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_mconsumosdolares", "Visa_mpagominimo"))) {
+    dataset[, Master_mconsumosdolares_minus_Visa_mpagominimo := Master_mconsumosdolares - Visa_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_madelantopesos", "Master_mpagominimo"))) {
+    dataset[, Master_madelantopesos_minus_Master_mpagominimo := Master_madelantopesos - Master_mpagominimo]
+  }
+
+  if(atributos_presentes(c("Master_madelantopesos", "Visa_mpagominimo"))) {
     dataset[, Master_madelantopesos_minus_Visa_mpagominimo := Master_madelantopesos - Visa_mpagominimo]
   }
+
   if(atributos_presentes(c("Master_madelantodolares", "Master_mpagominimo"))) {
     dataset[, Master_madelantodolares_minus_Master_mpagominimo := Master_madelantodolares - Master_mpagominimo]
   }
-  if(atributos_presentes(c("Visa_madelantodolares", "Visa_mpagominimo"))) {
-    dataset[, Master_madelantodolares_minus_Master_mpagominimo := Master_madelantodolares - Master_mpagominimo]
-  }
+
   if(atributos_presentes(c("Master_madelantodolares", "Visa_mpagominimo"))) {
     dataset[, Master_madelantodolares_minus_Visa_mpagominimo := Master_madelantodolares - Visa_mpagominimo]
   }
-  if(atributos_presentes(c("Master_msaldototal", "Master_mconsumototal"))) {
-    dataset[, Master_madelantodolares_minus_Visa_mpagominimo := Master_madelantodolares - Visa_mpagominimo]
+
+  if(atributos_presentes(c("Master_mpagosdolares", "Master_mpagominimo"))) {
+    dataset[, Master_mpagosdolares_minus_Master_mpagominimo := Master_mpagosdolares - Master_mpagominimo]
   }
-  if(atributos_presentes(c("Visa_msaldototal", "Visa_mconsumototal"))) {
-    dataset[, Master_madelantodolares_minus_Visa_mpagominimo := Master_madelantodolares - Visa_mpagominimo]
+
+  if(atributos_presentes(c("Master_mpagosdolares", "Visa_mpagominimo"))) {
+    dataset[, Master_mpagosdolares_minus_Visa_mpagominimo := Master_mpagosdolares - Visa_mpagominimo]
   }
 
 
